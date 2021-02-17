@@ -1,0 +1,22 @@
+name: Trigger external
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'message'
+        required: true
+
+jobs:
+  trigger-external:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: trigger
+          client-payload: '{ "message": "${{ github.event.inputs.message }}" }'
+      - name: Print message
+        run: echo "Dispatched trigger with message ${{ github.event.inputs.message }}"

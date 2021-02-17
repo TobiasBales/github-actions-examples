@@ -1,0 +1,13 @@
+name: External trigger
+
+on:
+  repository_dispatch:
+    types: [start-pipeline]
+
+jobs:
+  externally-triggered:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Triggered - ${{ github.event.client_payload.message }}"
+
