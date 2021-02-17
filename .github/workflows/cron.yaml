@@ -1,0 +1,13 @@
+name: Cron triggered
+
+on:
+  schedule:
+    - cron: '*/5 * * * MON-FRI'
+
+jobs:
+  cron-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Tests
+      run: echo "Tests passed"
