@@ -1,4 +1,4 @@
-name: CI/CD with manual trigger
+name: Manual trigger
 
 on:
   push:
@@ -13,25 +13,10 @@ on:
         default: 'main'
 
 jobs:
-  manual-ci-cd-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Tests
-      run: echo "Tests passed"
-  manual-ci-cd-lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Tests
-      run: echo "Linting passed"
-  manual-ci-cd-deploy:
+  manual-trigger:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    needs:
-      - manual-ci-cd-test
-      - manual-ci-cd-lint
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy
-        run: echo "Deploying ${{ github.event.inputs.branch }}"
+      - name: Print branch
+        run: echo "Working for branch ${{ github.event.inputs.branch }}"
