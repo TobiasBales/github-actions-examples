@@ -1,0 +1,36 @@
+name: CI/CD with manual trigger
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'branch'
+        required: true
+        default: 'main'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Tests
+      run: echo "Tests passed"
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Tests
+      run: echo "Linting passed"
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - lint
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        run: echo "Deploying ${{ github.event.inputs.branch }}"
