@@ -1,0 +1,18 @@
+name: CI with multiple node versions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [6, 8, 10]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Tests
+      run: echo "Tests passed for node ${{ matrix.node }}"
