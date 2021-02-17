@@ -7,13 +7,13 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  multi-job-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Tests
       run: echo "Tests passed"
-  lint:
+  multi-job-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

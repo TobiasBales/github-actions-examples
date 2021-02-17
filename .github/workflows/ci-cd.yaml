@@ -7,24 +7,24 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  ci-cd-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Tests
       run: echo "Tests passed"
-  lint:
+  ci-cd-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Tests
       run: echo "Linting passed"
-  deploy:
+  ci-cd-deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs:
-      - test
-      - lint
+      - ci-cd-test
+      - ci-cd-lint
     steps:
       - uses: actions/checkout@v2
       - name: Deploy

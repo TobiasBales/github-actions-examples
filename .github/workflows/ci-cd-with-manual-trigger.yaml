@@ -13,23 +13,24 @@ on:
         default: 'main'
 
 jobs:
-  test:
+  manual-ci-cd-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Tests
       run: echo "Tests passed"
-  lint:
+  manual-ci-cd-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Tests
       run: echo "Linting passed"
-  deploy:
+  manual-ci-cd-deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     needs:
-      - test
-      - lint
+      - manual-ci-cd-test
+      - manual-ci-cd-lint
     steps:
       - uses: actions/checkout@v2
       - name: Deploy
